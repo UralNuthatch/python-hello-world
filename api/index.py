@@ -79,9 +79,9 @@ class handler(BaseHTTPRequestHandler):
             web.run_app(app, host=WEBAPP_HOST)
 
 
-        if __name__ == '__main__':
+        #if __name__ == '__main__':
             #logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-            main()
+        main()
 
 
         return
