@@ -11,11 +11,11 @@ from fastapi import FastAPI
 
 
 # Настройки веб-сервера
-WEB_SERVER_HOST = "http://python-hello-world-uralnuthatchs-projects.vercel.app/"
+WEB_SERVER_HOST = "http://python-hello-world-uralnuthatchs-projects.vercel.app"
 # Порты сервера: 
 WEB_SERVER_PORT = 8350
 # Путь к маршруту вебхука, по которому Telegram будет отправлять запросы
-WEBHOOK_PATH = ''
+WEBHOOK_PATH = f'/bot/{getenv("BOT_TOKEN")}'
 # Базовый URL-адрес вебхука, который будет исп-ся для создания URL-адреса вебхука для Telegram
 BASE_WEBHOOK_URL = f"{WEB_SERVER_HOST}{WEBHOOK_PATH}"
 # На сервере только IPv6 (аналог ip4: 0.0.0.0).
@@ -24,6 +24,18 @@ WEBAPP_HOST = "0.0.0.0"
 
 def setup_app():
       
+    # включение логирования
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s: "
+               "%(filename)s: "
+               "%(levelname)s: "
+               "%(funcName)s(): "
+               "%(lineno)d:\t"
+               "%(message)s",
+    )  
+    logging.info("Application started")
+            
     app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
   
 
