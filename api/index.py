@@ -11,7 +11,7 @@ from fastapi import FastAPI
 
 
 # Настройки веб-сервера
-WEB_SERVER_HOST = "http://python-hello-world-uralnuthatchs-projects.vercel.app"
+WEB_SERVER_HOST = "http://python-hello-world-uralnuthatchs-projects.vercel.app/api"
 # Порты сервера: 
 WEB_SERVER_PORT = 8350
 # Путь к маршруту вебхука, по которому Telegram будет отправлять запросы
