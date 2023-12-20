@@ -5,7 +5,6 @@ from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from os import getenv
-from Environs import Env
 
 from aiohttp import web
 
