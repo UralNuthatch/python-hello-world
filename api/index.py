@@ -6,6 +6,11 @@ from aiogram.filters import Command, CommandStart
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from os import getenv
 from aiohttp import web
+from http.server import BaseHTTPRequestHandler
+
+
+class handler(BaseHTTPRequestHandler):
+    pass
 
     # Настройки веб-сервера
     WEB_SERVER_HOST = "http://python-hello-world-uralnuthatchs-projects.vercel.app/"
