@@ -1,6 +1,7 @@
 {
-  
-  "redirects": [
-    { "source": "/", "destination": "/api" }
-  ]
+  "functions": {
+    "api/**": {
+     
+    }
+  }
 }
