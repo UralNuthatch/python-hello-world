@@ -4,7 +4,5 @@
      "memory": 1024
     }
   },
-  {
   "redirects": [{ "source": "/", "destination": "/api" }]
-  }
 }
