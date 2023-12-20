@@ -10,7 +10,7 @@ from aiohttp import web
     # Настройки веб-сервера
     WEB_SERVER_HOST = "http://python-hello-world-uralnuthatchs-projects.vercel.app/"
     # Порты сервера: 8300-8499
-    WEB_SERVER_PORT = "8350"
+    WEB_SERVER_PORT = 8350
     # Путь к маршруту вебхука, по которому Telegram будет отправлять запросы
     WEBHOOK_PATH = ""
     # Базовый URL-адрес вебхука, который будет исп-ся для создания URL-адреса вебхука для Telegram
