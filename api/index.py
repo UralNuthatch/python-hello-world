@@ -26,7 +26,7 @@ class handler(BaseHTTPRequestHandler):
         # Базовый URL-адрес вебхука, который будет исп-ся для создания URL-адреса вебхука для Telegram
         BASE_WEBHOOK_URL = f"{WEB_SERVER_HOST}{WEBHOOK_PATH}"
         # На сервере только IPv6 (аналог ip4: 0.0.0.0)
-        WEBAPP_HOST = "::"
+        WEBAPP_HOST = "0.0.0.0"
 
 
         async def on_startup(bot: Bot) -> None:
