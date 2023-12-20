@@ -24,7 +24,7 @@ WEBAPP_HOST = "0.0.0.0"
 
 def setup_app():
       
-    app = FastAPI(openapi_url=None, docs_url=None, redoc_url=NOne)
+    app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
   
 
     # Создаем объекты бота и диспетчера
