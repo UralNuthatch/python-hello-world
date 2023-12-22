@@ -34,6 +34,8 @@ def main() -> None:
     bot = Bot(token=getenv("BOT_TOKEN"), parse_mode='HTML')
     dp = Dispatcher()
 
+    print("Bot created")
+    
     # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения
     # кроме команд "/start" и "/help"
     @dp.message()
