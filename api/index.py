@@ -58,10 +58,10 @@ async def send_echo(message: Message):
         await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
 
 @app.get("/")
-def setup():
-    bot.set_webhook(url="blablabla.com", drop_pending_updates=True)
+async def setup():
+    await bot.set_webhook(url="blablabla.com", drop_pending_updates=True)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
-    return "Webhook Updated"
+    #return "Webhook Updated"
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
