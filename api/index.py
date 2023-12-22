@@ -25,10 +25,10 @@ WEBAPP_HOST = "0.0.0.0"
 
 class handler(BaseHTTPRequestHandler):
 
-    async def on_startup(bot: Bot) -> None:
+    async def on_startup(self, bot: Bot) -> None:
         await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}")
 
-    def main() -> None:
+    def main(self) -> None:
 
         # Создаем объекты бота и диспетчера
         bot = Bot(token=getenv("BOT_TOKEN"), parse_mode='HTML')
