@@ -66,7 +66,7 @@ class handler(BaseHTTPRequestHandler):
             )
 
         # Register webhook handler on application
-            webhook_requests_handler.register(app, path=WEBHOOK_PATH)
+        webhook_requests_handler.register(app, path=WEBHOOK_PATH)
 
         # Mount dispatcher startup and shutdown hooks to aiohttp application
         setup_application(app, dp, bot=bot)
