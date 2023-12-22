@@ -82,3 +82,6 @@ class handler(BaseHTTPRequestHandler):
         self.main()
         return
 
+    def do_POST(self):
+        self.wfile.write('Zdarova, zaebal!'.encode('utf-8'))
+
