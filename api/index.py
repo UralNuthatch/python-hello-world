@@ -66,5 +66,5 @@ async def setup():
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    await res = dp.feed_webhook_update(bot, update)
+    res = await dp.feed_webhook_update(bot, update)
     return res
