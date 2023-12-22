@@ -1,5 +1,6 @@
 import logging
 import requests
+import asyncio
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
@@ -72,4 +73,4 @@ async def setup_app():
 
     return app
 
-app = await setup_app()
+app = asyncio.run(setup_app())
