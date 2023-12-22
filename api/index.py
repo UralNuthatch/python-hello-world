@@ -20,17 +20,6 @@ BASE_WEBHOOK_URL = f"{WEB_SERVER_HOST}{WEBHOOK_PATH}"
 # На сервере только IPv6 (аналог ip4: 0.0.0.0).
 WEBAPP_HOST = "0.0.0.0"
 
-# включение логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s: "
-            "%(filename)s: "
-            "%(levelname)s: "
-            "%(funcName)s(): "
-            "%(lineno)d:\t"
-            "%(message)s",
-)  
-logging.info("Application started")
 
 app = FastAPI()
 
