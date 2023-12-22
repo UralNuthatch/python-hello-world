@@ -59,7 +59,7 @@ async def send_echo(message: Message):
 
 @app.get("/")
 def setup():
-    bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+    bot.set_webhook(url="blablabla.com", drop_pending_updates=True)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return "Webhook Updated"
 
