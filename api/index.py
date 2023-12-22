@@ -67,7 +67,7 @@ def main() -> None:
 
 @app.get("/")
 async def setup():
-    main()
+    #main()
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return "Webhook Updated"
 
