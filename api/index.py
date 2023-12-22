@@ -4,8 +4,10 @@ import requests
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
+from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 from os import getenv
 from fastapi import FastAPI
+from aiohttp import web
 
 
 
