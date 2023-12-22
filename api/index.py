@@ -28,44 +28,45 @@ app = FastAPI()
 async def on_startup(bot: Bot) -> None:
     await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}")
 
+
+def main() -> None:
+    # Создаем объекты бота и диспетчера
+    bot = Bot(token=getenv("BOT_TOKEN"), parse_mode='HTML')
+    dp = Dispatcher()
+
+    # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения
+    # кроме команд "/start" и "/help"
+    @dp.message()
+    async def send_echo(message: Message):
+        try:
+            await message.send_copy(chat_id=message.chat.id)
+        except TypeError:
+            await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
+
+    # Register startup hook to initialize webhook
+    dp.startup.register(on_startup)
+
+    # Create aiohttp.web.Application instance
+    app = web.Application()
+
+    # Create an instance of request handler
+    webhook_requests_handler = SimpleRequestHandler(
+        dispatcher=dp,
+        bot=bot
+    )
+
+    # Register webhook handler on application
+    webhook_requests_handler.register(app, path=WEBHOOK_PATH)
+
+    # Mount dispatcher startup and shutdown hooks to aiohttp application
+    setup_application(app, dp, bot=bot)
+
+    # Запускаем веб-сервер
+    web.run_app(app, host=WEBAPP_HOST)
+
+
 @app.get("/")
 async def setup():
-
-    def main() -> None:
-        # Создаем объекты бота и диспетчера
-        bot = Bot(token=getenv("BOT_TOKEN"), parse_mode='HTML')
-        dp = Dispatcher()
-
-        # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения
-        # кроме команд "/start" и "/help"
-        @dp.message()
-        async def send_echo(message: Message):
-            try:
-                await message.send_copy(chat_id=message.chat.id)
-            except TypeError:
-                await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
-
-        # Register startup hook to initialize webhook
-        dp.startup.register(on_startup)
-
-        # Create aiohttp.web.Application instance
-        app = web.Application()
-
-        # Create an instance of request handler
-        webhook_requests_handler = SimpleRequestHandler(
-            dispatcher=dp,
-            bot=bot
-        )
-
-        # Register webhook handler on application
-        webhook_requests_handler.register(app, path=WEBHOOK_PATH)
-
-        # Mount dispatcher startup and shutdown hooks to aiohttp application
-        setup_application(app, dp, bot=bot)
-
-        # Запускаем веб-сервер
-        web.run_app(app, host=WEBAPP_HOST)
-
     main()
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return "Webhook Updated"
