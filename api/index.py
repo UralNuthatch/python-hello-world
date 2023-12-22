@@ -60,13 +60,12 @@ async def send_echo(message: Message):
         await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
 
 @app.get("/")
-async def setup():
-    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+def setup():
+    bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
     return "Webhook Updated"
 
 @app.post(WEBHOOK_PATH)
-async def bot_webhook(update: dict):
-    #res = await dp.feed_webhook_update(bot, update)
-    #return res
-    return "POST"
+def bot_webhook(update: dict):
+    res = dp.feed_webhook_update(bot, update)
+    return res
 
