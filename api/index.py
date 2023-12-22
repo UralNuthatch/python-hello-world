@@ -25,12 +25,11 @@ WEBAPP_HOST = "0.0.0.0"
 
 app = FastAPI()
 
-
+async def on_startup(bot: Bot) -> None:
+    await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}")
 
 @app.get("/")
-def setup():
-    async def on_startup(bot: Bot) -> None:
-        await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}")
+async def setup():
 
     def main() -> None:
         # Создаем объекты бота и диспетчера
