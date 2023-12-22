@@ -69,7 +69,7 @@ def main() -> None:
     # Запускаем веб-сервер
     web.run_app(app, host=WEBAPP_HOST)
 
+    return app
 
-#if __name__ == '__main__':
-    #logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-main()
+
+app = main()
