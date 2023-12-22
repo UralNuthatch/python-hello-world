@@ -28,7 +28,7 @@ app = FastAPI()
 
 
 @app.get("/")
-async def setup():
+def setup():
     async def on_startup(bot: Bot) -> None:
         await bot.set_webhook(f"{BASE_WEBHOOK_URL}{WEBHOOK_PATH}")
 
