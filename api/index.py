@@ -7,6 +7,7 @@ from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_applicati
 from os import getenv
 from aiohttp import web
 from fastapi import FastAPI
+from http.server import BaseHTTPRequestHandler
 
 
 
@@ -29,6 +30,5 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Content-type','text/plain')
         self.end_headers()
         self.wfile.write('Hello, world!'.encode('utf-8'))
-        return
-
+        return "Webhook Updated"
 
