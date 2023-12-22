@@ -1,5 +1,6 @@
 import logging
 import sys
+import asyncio
 import requests
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
@@ -59,7 +60,7 @@ async def send_echo(message: Message):
 
 @app.get("/")
 async def setup():
-    async with Timeout(300):
+    async with asyncio.timeout(10):
         await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     #return "Webhook Updated"
