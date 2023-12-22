@@ -6,6 +6,7 @@ from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from os import getenv
 from fastapi import FastAPI
+import asyncio
 
 
 
@@ -20,33 +21,12 @@ BASE_WEBHOOK_URL = f"{WEB_SERVER_HOST}{WEBHOOK_PATH}"
 # На сервере только IPv6 (аналог ip4: 0.0.0.0).
 WEBAPP_HOST = "0.0.0.0"
 
-# включение логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s: "
-            "%(filename)s: "
-            "%(levelname)s: "
-            "%(funcName)s(): "
-            "%(lineno)d:\t"
-            "%(message)s",
-)  
-logging.info("Application started")
-
 app = FastAPI()
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=getenv("BOT_TOKEN"), parse_mode='HTML')
 dp = Dispatcher()
 
-# Этот хэндлер будет срабатывать на команду "/start"
-@dp.message(Command(commands=["start"]))
-async def process_start_command(message: Message):
-    await message.answer('Привет!\nМеня зовут Эхо-бот!\nНапиши мне что-нибудь')
-
-# Этот хэндлер будет срабатывать на команду "/help"
-@dp.message(Command(commands=['help']))
-async def process_help_command(message: Message):
-    await message.answer('Напиши мне что-нибудь и в ответ\nя пришлю тебе твое сообщение')
 
 # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения
 # кроме команд "/start" и "/help"
@@ -59,8 +39,8 @@ async def send_echo(message: Message):
 
 @app.get("/")
 async def setup():
-    print(BASE_WEBHOOK_URL)
-    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+    async with asyncio.TimeoutError(10):
+        await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     #return "Webhook Updated"
 
