@@ -6,7 +6,6 @@ from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from os import getenv
 from fastapi import FastAPI
-from asyncio import Timeout
 
 
 
@@ -60,8 +59,8 @@ async def send_echo(message: Message):
 
 @app.get("/")
 async def setup():
-    async with Timeout(10):
-        await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+    print(BASE_WEBHOOK_URL)
+    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     #return "Webhook Updated"
 
