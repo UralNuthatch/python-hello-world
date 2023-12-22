@@ -61,7 +61,7 @@ async def send_echo(message: Message):
 
 @app.get("/")
 async def root():
-    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+    #await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
     return "Webhook Updated"
 
 @app.post(WEBHOOK_PATH)
