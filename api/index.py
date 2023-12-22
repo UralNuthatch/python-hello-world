@@ -72,4 +72,4 @@ async def setup_app():
 
     return app
 
-app = setup_app()
+app = await setup_app()
