@@ -22,7 +22,7 @@ WEBAPP_HOST = "0.0.0.0"
 app = FastAPI()
 
 # Создаем объекты бота и диспетчера
-bot = Bot(token=getenv("BOT_TOKEN"), parse_mode='HTML')
+bot = Bot(token=getenv("BOT_TOKEN"))
 dp = Dispatcher()
 
 
