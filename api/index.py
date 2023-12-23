@@ -47,4 +47,5 @@ async def bot_webhook(update: dict):
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=POST')
     return res
 
+bot.delete_webhook(drop_pending_updates=True)
 dp.run_polling(bot)
