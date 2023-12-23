@@ -1,6 +1,7 @@
 import logging
 import sys
 import requests
+import asyncio
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
@@ -34,7 +35,7 @@ class handler(BaseHTTPRequestHandler):
         async def setup():
             await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
 
-        setup()
+        asyncio.run(setup())
 
         
         
