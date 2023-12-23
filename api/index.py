@@ -1,7 +1,6 @@
 import logging
 import sys
 import requests
-import asyncio
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
@@ -37,11 +36,9 @@ async def send_echo(message: Message):
         await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
 
 @app.get("/")
-def setup():
-    async def my_webhook():
-        await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
-    asyncio.run(my_webhook())
-    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
+async def setup():
+    #await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+    #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return "Webhook Updated"
 
 @app.post(WEBHOOK_PATH)
