@@ -1,3 +1,11 @@
+import logging
+import sys
+import requests
+from aiogram import Bot, Dispatcher
+from aiogram.types import Message
+from aiogram.filters import Command, CommandStart
+from os import getenv
+from fastapi import FastAPI
 from http.server import BaseHTTPRequestHandler
 
 class handler(BaseHTTPRequestHandler):
