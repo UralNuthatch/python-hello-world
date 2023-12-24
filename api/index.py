@@ -37,12 +37,13 @@ async def send_echo(message: Message):
 
 @app.get("/")
 async def setup():
-    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
-    #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
+    #await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/setWebhook?url={BASE_WEBHOOK_URL}')
+    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return "Webhook Updated"
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    res = await dp.feed_webhook_update(bot, update)
+    #res = await dp.feed_webhook_update(bot, update)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=POST')
-    return res
+    #return res
