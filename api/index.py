@@ -6,6 +6,7 @@ from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from os import getenv
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 
 
 # Настройки веб-сервера
@@ -19,7 +20,15 @@ BASE_WEBHOOK_URL = f"{WEB_SERVER_HOST}{WEBHOOK_PATH}"
 # На сервере только IPv6 (аналог ip4: 0.0.0.0).
 WEBAPP_HOST = "0.0.0.0"
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+#webhook_info = await bot.get_webhook_info()
+#if webhook_info.url != BASE_WEBHOOK_URL:
+await bot.set_webhook(url=BASE_WEBHOOK_URL)
+yield
+await bot.delete_webhook()
+
+app = FastAPI(lifespan=lifespan)
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=getenv("BOT_TOKEN"))
@@ -35,11 +44,11 @@ async def send_echo(message: Message):
     except TypeError:
         await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
 
-@app.get("/")
-async def setup():
-    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
-    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
-    return "Webhook Updated"
+#@app.get("/")
+#async def setup():
+#    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
+#    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
+#    return "Webhook Updated"
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
