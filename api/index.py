@@ -24,9 +24,9 @@ WEBAPP_HOST = "0.0.0.0"
 async def lifespan(app: FastAPI):
 #webhook_info = await bot.get_webhook_info()
 #if webhook_info.url != BASE_WEBHOOK_URL:
-await bot.set_webhook(url=BASE_WEBHOOK_URL)
-yield
-await bot.delete_webhook()
+    await bot.set_webhook(url=BASE_WEBHOOK_URL)
+    yield
+    await bot.delete_webhook()
 
 app = FastAPI(lifespan=lifespan)
 
