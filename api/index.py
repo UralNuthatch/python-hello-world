@@ -1,7 +1,7 @@
 import logging
 import sys
 import requests
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from os import getenv
@@ -52,6 +52,6 @@ async def send_echo(message: Message):
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    res = await dp.feed_webhook_update(bot, update)
+    telegram_update = types.Update(**update)
+    await dp.feed_update(bot=bot, update=telegram_update)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=POST')
-    return res
