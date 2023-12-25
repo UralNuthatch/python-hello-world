@@ -20,7 +20,7 @@ BASE_WEBHOOK_URL = f"{WEB_SERVER_HOST}{WEBHOOK_PATH}"
 # На сервере только IPv6 (аналог ip4: 0.0.0.0).
 WEBAPP_HOST = "0.0.0.0"
 
-app = Sanic()
+app = Sanic("Vercel")
 
 # Создаем объекты бота и диспетчера!
 bot = Bot(token=getenv("BOT_TOKEN"))
