@@ -36,8 +36,9 @@ async def send_echo(message: Message):
     except TypeError:
         await message.reply(text = 'Данный тип апдейтов не поддерживается методом send_copy')
 
-@app.get("/")
-async def setup(request):
+@app.route('/')
+@app.route('/<path:path>')
+async def index(request, path=""):
     #await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
     #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/setWebhook?url={BASE_WEBHOOK_URL}')
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
