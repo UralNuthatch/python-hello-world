@@ -22,7 +22,7 @@ WEBAPP_HOST = "0.0.0.0"
 
 app = Sanic()
 
-# Создаем объекты бота и диспетчера!!!
+# Создаем объекты бота и диспетчера
 bot = Bot(token=getenv("BOT_TOKEN"))
 dp = Dispatcher()
 
