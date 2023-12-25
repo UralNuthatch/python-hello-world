@@ -21,5 +21,4 @@ typing_extensions==4.7.1
 yarl==1.9.3
 fastapi
 requests
-sanic==19.6.0
 
