@@ -2,7 +2,7 @@ import logging
 import sys
 import requests
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import Message
+from aiogram.types import Message, Update
 from aiogram.filters import Command, CommandStart
 from os import getenv
 from fastapi import FastAPI
@@ -53,6 +53,8 @@ async def setup():
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    await dp.feed_webhook_update(bot, update)
+    #await dp.feed_webhook_update(bot, update)
+    telegram_update = Update(**update)
+    await dp.process_update(telegram_update)
     #await asyncio.sleep(5)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
