@@ -29,11 +29,12 @@ async def lifespan(app: FastAPI):
     yield
     await bot.delete_webhook()
 
-app = FastAPI(lifespan=lifespan)
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=getenv("BOT_TOKEN"))
 dp = Dispatcher()
+
+app = FastAPI(lifespan=lifespan)
 
 
 # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения
