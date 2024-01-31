@@ -1,7 +1,6 @@
 import logging
 import sys
 import requests
-import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message, Update
 from aiogram.filters import Command, CommandStart
@@ -54,6 +53,4 @@ async def setup():
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
     await dp.feed_webhook_update(bot, update)
-    #task = asyncio.create_task(dp.feed_webhook_update(bot, update))
-    #await task
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
