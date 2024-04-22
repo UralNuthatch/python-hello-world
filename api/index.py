@@ -55,12 +55,12 @@ async def setup():
     return type(app)
 
 async def my(update):  
-    await bot.send_message(348123497, "aloha")
-    await dp.feed_webhook_update(bot, update)    
+    #await bot.send_message(348123497, "aloha")
+    #await dp.feed_webhook_update(bot, update)    
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
 
 @app.post(WEBHOOK_PATH)
-def bot_webhook(update: dict):
+async def bot_webhook(update: dict):
     loop = asyncio.get_event_loop()
     future = asyncio.run_coroutine_threadsafe(my(update), loop)
     #await bot.send_message(chat_id=348123497, text="test")
