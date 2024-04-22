@@ -54,7 +54,7 @@ async def setup():
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return type(app)
 
-def my(update):
+async def my(update):
     await dp.feed_webhook_update(bot, update)
 
 def asynchronous_start(update, loop):
