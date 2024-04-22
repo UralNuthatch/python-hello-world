@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
 bot = Bot(token=getenv("BOT_TOKEN"))
 dp = Dispatcher()
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 
 # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения
