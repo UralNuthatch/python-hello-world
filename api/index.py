@@ -57,6 +57,7 @@ async def setup():
 async def my(update):
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
     await dp.feed_webhook_update(bot, update)
+    await bot.send_message(348123497, "aloha")
 
 def asynchronous_start(update, loop):
     # В новом потоке для asyncio устанавливаем тот же цикл
