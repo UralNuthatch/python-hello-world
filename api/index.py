@@ -8,6 +8,7 @@ from aiogram.filters import Command, CommandStart
 from os import getenv
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+from threading import Thread
 
 
 # Настройки веб-сервера
@@ -53,9 +54,14 @@ async def setup():
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return type(app)
 
+def my(user_id, loop):
+    asyncio.run_coroutine_threadsafe(bot.send_message(user_id, "rrrrrr"), loop)
+
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
     loop = asyncio.get_event_loop()
+    test = Thread(target=my, args=(348123497, loop))
+    test.start()
     #await bot.send_message(chat_id=348123497, text="test")
     #await dp.feed_webhook_update(bot, update)
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
