@@ -25,7 +25,7 @@ WEBAPP_HOST = "0.0.0.0"
 async def lifespan(app: FastAPI):
 #webhook_info = await bot.get_webhook_info()
 #if webhook_info.url != BASE_WEBHOOK_URL:
-    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
+    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Aloha')
     #await bot.set_webhook(url=BASE_WEBHOOK_URL)
     yield
     await bot.delete_webhook()
@@ -50,15 +50,10 @@ async def send_echo(message: Message):
 @app.get("/")
 async def setup():
 #    await bot.set_webhook(url=BASE_WEBHOOK_URL, drop_pending_updates=True)
-#    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
+    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return type(app)
-
-async def my_msg():
-    await bot.send_message(chat_id=348123497, text="aloha")
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    asyncio.create_task(my_msg())
-    asyncio.ensure_future(my_msg())
     #await dp.feed_webhook_update(bot, update)
-    #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
+    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
