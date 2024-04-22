@@ -27,6 +27,7 @@ async def lifespan(app: FastAPI):
 #if webhook_info.url != BASE_WEBHOOK_URL:
     #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     await bot.set_webhook(url=BASE_WEBHOOK_URL)
+    await bot.send_message(chat_id=348123497, text="aloha")
     yield
     await bot.delete_webhook()
 
