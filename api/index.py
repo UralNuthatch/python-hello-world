@@ -1,5 +1,6 @@
 import logging
 import sys
+import asyncio
 import requests
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message, Update
