@@ -33,7 +33,7 @@ async def lifespan(app: FastAPI):
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=getenv("BOT_TOKEN"))
-dp = Dispatcher()
+dp = Dispatcher(bot)
 
 app = FastAPI(lifespan=lifespan)
 
@@ -53,15 +53,7 @@ async def setup():
 #    requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return type(app)
 
-async def my(update):
-    await dp.feed_webhook_update(bot, update)
-
-
 @app.post(WEBHOOK_PATH)
-def bot_webhook(update: dict):
-    asyncio.get_event_loop().run_until_complete(my(update))
-
-#@app.post(WEBHOOK_PATH)
-#async def bot_webhook(update: dict):
-#    await dp.feed_webhook_update(bot, update)
+async def bot_webhook(update: dict):
+    await dp.feed_webhook_update(bot, update)
     #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
