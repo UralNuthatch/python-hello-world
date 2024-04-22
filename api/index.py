@@ -60,7 +60,7 @@ async def my(update):
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
 
 @app.post(WEBHOOK_PATH)
-async def bot_webhook(update: dict):
+def bot_webhook(update: dict):
     loop = asyncio.get_event_loop()
     future = asyncio.run_coroutine_threadsafe(my(update), loop)
     #await bot.send_message(chat_id=348123497, text="test")
