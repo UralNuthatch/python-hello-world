@@ -54,14 +54,24 @@ async def setup():
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=Hello')
     return type(app)
 
-def my(update, loop):
-    asyncio.run_coroutine_threadsafe(dp.feed_webhook_update(bot, update), loop)
+def my(update):
+    await dp.feed_webhook_update(bot, update)
+
+def asynchronous_start(update, loop):
+    # В новом потоке для asyncio устанавливаем тот же цикл
+    asyncio.set_event_loop(loop)
+    # Запускаем асинхронную функцию
+    loop.create_task(my(update))
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
     loop = asyncio.get_event_loop()
-    test = Thread(target=my, args=(update, loop))
-    test.start()
+    server_thread = Thread(
+        target=asynchronous_start, args=(update, loop)
+    )
+    # При KeyboardInterrupt поток останавливается
+    server_thread.daemon = True
+    server_thread.start()
     #await bot.send_message(chat_id=348123497, text="test")
     #await dp.feed_webhook_update(bot, update)
     #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
