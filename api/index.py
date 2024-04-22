@@ -34,7 +34,7 @@ async def lifespan(app: FastAPI):
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=getenv("BOT_TOKEN"))
-dp = Dispatcher()
+dp = Dispatcher(lifespan=lifespan)
 
 app = FastAPI()
 
