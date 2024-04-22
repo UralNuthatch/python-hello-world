@@ -55,5 +55,6 @@ async def setup():
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    await dp.feed_webhook_update(bot, update)
+    await bot.send_message(chat_id=348123497, text="aloha")
+    #await dp.feed_webhook_update(bot, update)
     #requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
