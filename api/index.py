@@ -55,9 +55,7 @@ async def setup():
     return type(app)
 
 async def feed(update):
-    await asyncio.sleep(1)
-    await bot.send_message(chat_id=348123497, text="sleep")
-    #await dp.feed_webhook_update(bot, update)
+    await dp.feed_webhook_update(bot, update)
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
