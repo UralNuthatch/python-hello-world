@@ -33,9 +33,9 @@ async def lifespan(app: FastAPI):
 
 
 # Создаем объекты бота и диспетчера
-bot = Bot(token=getenv("BOT_TOKEN"))
 dp = Dispatcher()
-
+bot = Bot(token=getenv("BOT_TOKEN"))
+requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text=MAIN')
 app = FastAPI(lifespan=lifespan)
 
 
