@@ -59,8 +59,8 @@ async def feed(update):
 
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(update: dict):
-    await bot.send_message(chat_id=348123497, text="test")
+    #await bot.send_message(chat_id=348123497, text="test")
     #await dp.feed_webhook_update(bot, update)
-    #task = asyncio.get_event_loop().create_task(feed(update))
-    #await task
+    task = asyncio.get_event_loop().create_task(feed(update))
+    await task
     requests.get(f'https://api.telegram.org/bot{getenv("BOT_TOKEN")}/sendMessage?chat_id=348123497&text={update}')
